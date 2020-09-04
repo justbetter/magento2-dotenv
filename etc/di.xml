@@ -3,4 +3,8 @@
     <type name="Magento\Framework\App\DeploymentConfig\Writer">
         <plugin name="JustBetter_DotEnv::disable_env_writer" type="JustBetter\DotEnv\Plugin\DeploymentConfig\WriterPlugin" sortOrder="1" />
     </type>
+
+    <type name="Magento\Config\Model\Config\Processor\EnvironmentPlaceholder">
+       <plugin name="JustBetter_DotEnv::include_frontend_vars" type="JustBetter\DotEnv\Plugin\EnvironmentPlaceholderPlugin" />
+    </type>
 </config>
