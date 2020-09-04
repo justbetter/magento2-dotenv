@@ -1,0 +1,25 @@
+{
+  "name": "justbetter/dotenv",
+  "description": "Module to overwrite and set environment variables",
+  "type": "magento2-module",
+  "require": {
+    "php": ">=7.0",
+    "magento/framework": "*",
+    "vlucas/phpdotenv": "^2.4"
+  },
+  "authors": [
+    {
+      "name": "Rakhal Imming",
+      "email": "rakhal@justbetter.nl"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "JustBetter\\DotEnv\\": ""
+    },
+    "files": [
+        "registration.php",
+        "App/MagentoDotEnv.php"
+    ]
+  }
+}
