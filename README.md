@@ -1,6 +1,6 @@
 # Magento 2 DotEnv loader
 
-Adds support for .env configuration files to Magento 2. Variables in the .env file are used to fill in `app/etc/env.php` variables. This file can be added to source control when using this package. I think having more than one environment file is weird. Besides of that you can lock environment variables in the env.php but it's not really managable via source control.
+Adds support for .env configuration files to Magento 2. Variables in the .env file are used to fill in `app/etc/env.php` variables. This file can be added to source control when using this package. I think having more than one environment file is weird.
 
 ## Credits
 Credits to [this package](https://github.com/Pr00xxy/magento2-dotenv) which inspired me to make this package.
