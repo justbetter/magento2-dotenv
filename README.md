@@ -9,9 +9,7 @@ Credits to [this package](https://github.com/Pr00xxy/magento2-dotenv) which insp
 - `composer require justbetter/dotenv`
 - Copy the `.env.example` [example file](Example/.env.example) to `app/etc/.env` and fill in your environment variables.
 - Replace the `env.php` with this [one](Example/env.php) and commit it to source control.
-Note: setup:upgrade will add an autoload file to your composer.json root file to autoload the propper environment. You can commit this.
 - `bin/magento setup:upgrade`
-- run in the root `composer dumpautoload` to autoload the dot env files.
 
 ## Extending the environments
 You can override specific environments with the APP_ENV variable in the dot env filename. [example](Example/.env.development.example). Copy the file to `app/etc/` and modify for any specified environment.
