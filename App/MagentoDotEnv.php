@@ -26,7 +26,7 @@ class MagentoDotEnv
         while ($rootDirectory != '/') {
             if (is_dir($rootDirectory.'/app/etc') && file_exists($rootDirectory.'/app/etc/.env')) {
                 $dotenv = new Dotenv($rootDirectory.'/app/etc/');
-                $dotenv->load();
+                $dotenv->overLoad();
                 $dotenv->required(['APP_ENV', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'CRYPT_KEY']);
                 $this->loadEnvironments($rootDirectory);
                 break;
