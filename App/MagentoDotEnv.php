@@ -25,8 +25,8 @@ class MagentoDotEnv
 
         while ($rootDirectory != '/') {
             if (is_dir($rootDirectory.'/app/etc') && file_exists($rootDirectory.'/app/etc/.env')) {
-                $dotenv = new Dotenv($rootDirectory.'/app/etc/');
-                $dotenv->overLoad();
+                $dotenv = Dotenv::createMutable($rootDirectory.'/app/etc/');
+                $dotenv->load();
                 $dotenv->required(['APP_ENV', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'CRYPT_KEY']);
                 $this->loadEnvironments($rootDirectory);
                 break;
@@ -48,8 +48,8 @@ class MagentoDotEnv
 
         // override .env values
         if (file_exists($rootDirectory.'/app/etc/.env.'.$_ENV['APP_ENV'])) {
-            $dotenv = new Dotenv($rootDirectory.'/app/etc/', '.env.'.$_ENV['APP_ENV']);
-            $dotenv->overload();
+            $dotenv = Dotenv::createMutable($rootDirectory.'/app/etc/', '.env.'.$_ENV['APP_ENV']);
+            $dotenv->load();
         }
     }
 

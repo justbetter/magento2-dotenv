@@ -5,7 +5,7 @@
   "require": {
     "php": ">=7.0",
     "magento/framework": "*",
-    "vlucas/phpdotenv": "^2.4"
+    "vlucas/phpdotenv": "^5.4"
   },
   "authors": [
     {
