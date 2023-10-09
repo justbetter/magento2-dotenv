@@ -10,7 +10,8 @@ return [
         'table_prefix' => $_ENV['DB_TABLE_PREFIX'],
         'connection' => [
             'default' => [
-                'host' => $_ENV['DB_HOST'],
+                'unix_socket' => $_ENV['DB_SOCKET'],
+                'host' => $_ENV['DB_PORT'] ? $_ENV['DB_HOST'].':'.$_ENV['DB_PORT'] : $_ENV['DB_HOST'],
                 'dbname' => $_ENV['DB_DATABASE'],
                 'username' => $_ENV['DB_USERNAME'],
                 'password' => $_ENV['DB_PASSWORD'],
