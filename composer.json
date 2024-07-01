@@ -3,7 +3,7 @@
   "description": "Module to overwrite and set environment variables",
   "type": "magento2-module",
   "require": {
-    "php": ">=7.0",
+    "php": ">=8.0",
     "magento/framework": "*",
     "vlucas/phpdotenv": "^5.4"
   },

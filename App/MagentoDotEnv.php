@@ -25,7 +25,7 @@ class MagentoDotEnv
 
         while ($rootDirectory != '/') {
             if (is_dir($rootDirectory.'/app/etc') && (file_exists($rootDirectory.'/app/etc/.env') || file_exists($rootDirectory.'/.env'))) {
-                $dotenv = Dotenv::createMutable([$rootDirectory, $rootDirectory.'/app/etc/']);
+                $dotenv = Dotenv::createMutable([$rootDirectory, $rootDirectory.'/app/etc/'], shortCircuit: false);
                 $dotenv->load();
                 $dotenv->required(['APP_ENV', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'CRYPT_KEY']);
                 $this->loadEnvironments($rootDirectory);
