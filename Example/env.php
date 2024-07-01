@@ -34,7 +34,34 @@ return [
     'x-frame-options' => 'SAMEORIGIN',
     'MAGE_MODE' => $_ENV['MAGE_MODE'],
     'session' => [
-        'save' => 'files'
+        // possible: files, redis, db, memcache
+        'save' => $_ENV['SESSION_DRIVER'] ?? 'files',
+        'save_path' => $_ENV['SESSION_SAVE_PATH'],
+        'db_connection' => $_ENV['SESSION_DATABASE_CONNECTION'] ?? 'default',
+        'table' => $_ENV['SESSION_DATABASE_TABLE'] ?? 'session',
+        'gc_probability' => 1,
+        'gc_divisor' => 10000,
+        'gc_maxlifetime' => 1440,
+        'redis' => [
+            'host' => $_ENV['REDIS_SESSION_HOST'] ?? '127.0.0.1',
+            'port' => $_ENV['REDIS_SESSION_PORT'] ?? '6379',
+            'server' => $_ENV['REDIS_SESSION_SERVER'],
+            'timeout' => $_ENV['REDIS_SESSION_TIMEOUT'] ?? '2.5',
+            'persistent_identifier' => '',
+            'database' => $_ENV['REDIS_SESSION_DATABASE'] ?? '0',
+            'compression_threshold' => '2048',
+            'compression_library' => 'gzip',
+            'log_level' => '1',
+            'max_concurrency' => $_ENV['REDIS_SESSION_MAX_CONCURRENCY'] ?? '18',
+            'break_after_frontend' => '5',
+            'break_after_adminhtml' => '30',
+            'first_lifetime' => '600',
+            'bot_first_lifetime' => '60',
+            'bot_lifetime' => '7200',
+            'disable_locking' => $_ENV['REDIS_SESSION_DISABLE_LOCKING'] ?? '0',
+            'min_lifetime' => '60',
+            'max_lifetime' => '2592000'
+        ],
     ],
     'cache_types' => [
         'config' => 1,
@@ -64,5 +91,11 @@ return [
         'log_everything' => 1,
         'query_time_threshold' => '0.001',
         'include_stacktrace' => 1
-    ]
+    ],
+    'queue' => [
+        'consumers_wait_for_messages' => $_ENV['QUEUE_CONSUMERS_WAIT_FOR_MESSAGES'] ?? 0,
+    ],
+    'graphql' => [
+        'disable_introspection' => $_ENV['APP_ENV'] === 'production',
+    ],
 ];
