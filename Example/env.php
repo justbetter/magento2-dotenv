@@ -36,7 +36,7 @@ return [
     'session' => [
         // possible: files, redis, db, memcache
         'save' => $_ENV['SESSION_DRIVER'] ?? 'files',
-        'save_path' => $_ENV['SESSION_SAVE_PATH'],
+        'save_path' => $_ENV['SESSION_SAVE_PATH'] ?? null,
         'db_connection' => $_ENV['SESSION_DATABASE_CONNECTION'] ?? 'default',
         'table' => $_ENV['SESSION_DATABASE_TABLE'] ?? 'session',
         'gc_probability' => 1,
@@ -45,7 +45,7 @@ return [
         'redis' => [
             'host' => $_ENV['REDIS_SESSION_HOST'] ?? '127.0.0.1',
             'port' => $_ENV['REDIS_SESSION_PORT'] ?? '6379',
-            'server' => $_ENV['REDIS_SESSION_SERVER'],
+            'server' => $_ENV['REDIS_SESSION_SERVER'] ?? null,
             'timeout' => $_ENV['REDIS_SESSION_TIMEOUT'] ?? '2.5',
             'persistent_identifier' => '',
             'database' => $_ENV['REDIS_SESSION_DATABASE'] ?? '0',
