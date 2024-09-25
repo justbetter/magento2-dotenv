@@ -24,8 +24,8 @@ class MagentoDotEnv
         $rootDirectory = __DIR__;
 
         while ($rootDirectory != '/') {
-            if (is_dir($rootDirectory.'/app/etc') && file_exists($rootDirectory.'/app/etc/.env')) {
-                $dotenv = Dotenv::createMutable($rootDirectory.'/app/etc/');
+            if (is_dir($rootDirectory.'/app/etc') && (file_exists($rootDirectory.'/app/etc/.env') || file_exists($rootDirectory.'/.env'))) {
+                $dotenv = Dotenv::createMutable([$rootDirectory, $rootDirectory.'/app/etc/'], shortCircuit: false);
                 $dotenv->load();
                 $dotenv->required(['APP_ENV', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'CRYPT_KEY']);
                 $this->loadEnvironments($rootDirectory);
@@ -44,13 +44,20 @@ class MagentoDotEnv
     protected function loadEnvironments($rootDirectory): void
     {
         $this->setEnvironment('APP_ENV', $_ENV['APP_ENV'] ?: 'development');
-        $this->setEnvironment('MAGE_MODE', $_ENV['APP_ENV'] !== 'production' ? 'developer' : 'production');
 
-        // override .env values
-        if (file_exists($rootDirectory.'/app/etc/.env.'.$_ENV['APP_ENV'])) {
-            $dotenv = Dotenv::createMutable($rootDirectory.'/app/etc/', '.env.'.$_ENV['APP_ENV']);
-            $dotenv->load();
-        }
+        $dotenv = Dotenv::createMutable([$rootDirectory, $rootDirectory.'/app/etc/'], array_filter([...$this->envToArray($_ENV['LOAD_BEFORE'] ?? ''), '.env.'.$_ENV['APP_ENV'], '.env', ...$this->envToArray($_ENV['LOAD_AFTER'] ?? '')]), false);
+        $dotenv->load();
+
+        $this->setEnvironment('MAGE_MODE', $_ENV['APP_ENV'] !== 'production' ? 'developer' : 'production');
+    }
+
+    /**
+     * Turn space seperated paths into array, ignoring escape sequences.
+     */
+    protected function envToArray(string $envValue = ''): array
+    {
+        $array = preg_split('/(?<!\\\) /', $envValue);
+        return preg_replace('/(?<!\\\) /', ' ', $array);
     }
 
     /**
