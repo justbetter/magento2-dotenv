@@ -33,6 +33,11 @@ return [
     ],
     'x-frame-options' => 'SAMEORIGIN',
     'MAGE_MODE' => $_ENV['MAGE_MODE'],
+    'deployment' => [
+        'blue_green' => [
+            'enabled' => $_ENV['BLUE_GREEN_DEPLOYMEMT'] ?? $_ENV['APP_ENV'] === 'production',
+        ]
+    ],
     'session' => [
         // possible: files, redis, db, memcache
         'save' => $_ENV['SESSION_DRIVER'] ?? 'files',
