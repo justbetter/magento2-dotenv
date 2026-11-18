@@ -19,9 +19,10 @@ class WriterPlugin
         array $data,
         $override = false,
         $pool = null,
-        array $comments = []
+        array $comments = [],
+        bool $lock = false
     ) {
         unset($data['app_env']);
-        $proceed($data, $override, $pool, $comments);
+        $proceed($data, $override, $pool, $comments, $lock);
     }
 }
