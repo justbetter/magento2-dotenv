@@ -17,7 +17,6 @@ return [
                 'password' => $_ENV['DB_PASSWORD'],
                 'model' => 'mysql4',
                 'engine' => 'innodb',
-                'initStatements' => 'SET NAMES utf8;',
                 'active' => '1',
                 'profiler' => [
                     'class' => 'Magento\\Framework\\DB\\Profiler',

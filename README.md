@@ -19,6 +19,11 @@ You can also load additional .env files by defining them in `LOAD_BEFORE` (allow
 ## Disabled the writer to env.php
 Because of the Writer class of magento 2 the `env.php` get rewrited every time. I disabled this functionality because the `env.php` file is not static. The cache types are not reset every time when you run `bin/magento setup:upgrade`.
 
+### Do not use `SET NAMES utf8` in `initStatements`
+Mage-OS and newer Magento versions remove the deprecated `SET NAMES utf8;` from the database `initStatements` during `bin/magento setup:upgrade`. This cleanup writes `env.php` with a `Writer` that is created outside of the object manager, so the plugin of this module cannot prevent it. The result is an `env.php` where every `$_ENV` variable is replaced by its current value.
+
+Remove the `initStatements` line (or any `SET NAMES utf8` statement in it) from your `env.php` to prevent this. The [example](Example/env.php) no longer contains it.
+
 ## Compatibility
 The module is tested on Magento version 2.4.x
 
